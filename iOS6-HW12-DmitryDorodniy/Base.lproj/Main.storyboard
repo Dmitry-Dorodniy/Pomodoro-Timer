@@ -47,12 +47,12 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q9I-4o-SzJ">
-                                        <rect key="frame" x="215" y="0.0" width="76" height="31"/>
+                                        <rect key="frame" x="239" y="0.0" width="52" height="31"/>
                                         <color key="tintColor" systemColor="systemGray6Color"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Resume"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Skip"/>
                                         <connections>
-                                            <action selector="resumeButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Djd-8c-2ik"/>
+                                            <action selector="skipButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0ay-93-Z9D"/>
                                         </connections>
                                     </button>
                                 </subviews>

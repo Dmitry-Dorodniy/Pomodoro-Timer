@@ -23,7 +23,7 @@ class ViewController: UIViewController {
         resetTime()
     }
 
-    @IBAction func resumeButton(_ sender: Any) {
+    @IBAction func skipButton(_ sender: Any) {
         changeInterface()
         resetTime()
 

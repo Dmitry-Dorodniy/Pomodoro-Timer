@@ -28,7 +28,7 @@ class ViewController: UIViewController {
         resetTime()
     }
 
-    private lazy var progressBar: UIView = {
+    private lazy var progressContainer: UIView = {
         let view = UIView()
         view.backgroundColor = Colors.viewBackgroundColor
         return view
@@ -65,30 +65,30 @@ class ViewController: UIViewController {
     }
 
     private func setupHierarchy() {
-        view.addSubview(progressBar)
+        view.addSubview(progressContainer)
         view.addSubview(timerLabel)
-        progressBar.addSubview(circularProgressBarView)
-        progressBar.addSubview(playButton)
+        progressContainer.addSubview(circularProgressBarView)
+        progressContainer.addSubview(playButton)
     }
 
     // MARK: - Setup Layout
 
     private func setupLayout() {
-        progressBar.translatesAutoresizingMaskIntoConstraints = false
-        progressBar.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
-        progressBar.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor,
-                                             constant: -150).isActive = true
-        progressBar.heightAnchor.constraint(equalToConstant: Metric.progressBarWidth).isActive = true
-        progressBar.widthAnchor.constraint(equalToConstant: Metric.progressBarWidth).isActive = true
+        progressContainer.translatesAutoresizingMaskIntoConstraints = false
+        progressContainer.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        progressContainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,
+                                             constant: 50).isActive = true
+        progressContainer.heightAnchor.constraint(equalToConstant: Metric.progressBarWidth).isActive = true
+        progressContainer.widthAnchor.constraint(equalToConstant: Metric.progressBarWidth).isActive = true
 
         timerLabel.translatesAutoresizingMaskIntoConstraints = false
-        timerLabel.centerXAnchor.constraint(equalTo: progressBar.centerXAnchor).isActive = true
-        timerLabel.centerYAnchor.constraint(equalTo: progressBar.centerYAnchor,
+        timerLabel.centerXAnchor.constraint(equalTo: progressContainer.centerXAnchor).isActive = true
+        timerLabel.centerYAnchor.constraint(equalTo: progressContainer.centerYAnchor,
                                             constant: -40).isActive = true
 
         playButton.translatesAutoresizingMaskIntoConstraints = false
-        playButton.centerXAnchor.constraint(equalTo: progressBar.centerXAnchor).isActive = true
-        playButton.centerYAnchor.constraint(equalTo: progressBar.centerYAnchor,
+        playButton.centerXAnchor.constraint(equalTo: progressContainer.centerXAnchor).isActive = true
+        playButton.centerYAnchor.constraint(equalTo: progressContainer.centerYAnchor,
                                             constant: Metric.progressBarWidth / 5).isActive = true
 
     }

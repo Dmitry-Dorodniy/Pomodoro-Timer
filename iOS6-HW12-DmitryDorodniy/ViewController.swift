@@ -42,7 +42,6 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var timerLabel: UILabel!
 
-
     private lazy var playButton: UIButton = {
         let button = UIButton()
         //        let image = UIImage(systemName: "play")?.withTintColor(.lightGray, renderingMode: .alwaysOriginal)

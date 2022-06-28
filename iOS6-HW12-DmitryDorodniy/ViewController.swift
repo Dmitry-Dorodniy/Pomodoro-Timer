@@ -28,8 +28,6 @@ class ViewController: UIViewController {
         resetTime()
     }
 
-    var circularProgressBarView: CircularProgressBarView!
-
     private lazy var progressBar: UIView = {
         let view = UIView()
         view.backgroundColor = Colors.viewBackgroundColor
@@ -40,14 +38,16 @@ class ViewController: UIViewController {
 
     private lazy var playButton: UIButton = {
         let button = UIButton()
-
         button.tintColor = UIColor(cgColor: Colors.progressBarWorkColor)
         button.setImage(imagePlay, for: .normal)
         button.setPreferredSymbolConfiguration(UIImage.SymbolConfiguration(pointSize: 50, weight: UIImage.SymbolWeight.thin), forImageIn: .normal)
         button.addTarget(self, action: #selector(PlayButtonAction), for: .touchUpInside)
-
         return button
     }()
+
+    var circularProgressBarView: CircularProgressBarView!
+
+    // MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,6 +70,8 @@ class ViewController: UIViewController {
         progressBar.addSubview(circularProgressBarView)
         progressBar.addSubview(playButton)
     }
+
+    // MARK: - Setup Layout
 
     private func setupLayout() {
         progressBar.translatesAutoresizingMaskIntoConstraints = false
@@ -94,17 +96,15 @@ class ViewController: UIViewController {
     // MARK: - Setup Shape View
 
     func setupCircularProgressBarView() {
-
         //set view
         circularProgressBarView = CircularProgressBarView(frame: CGRect(x: 0,
                                                                         y: 0,
                                                                         width: Metric.progressBarWidth,
                                                                         height: Metric.progressBarWidth) )
-
-
     }
 
-    //  MARK: - Action
+    //  MARK: - Button Play Pause
+
     @objc private func PlayButtonAction() {
         if !isStarted {
             timerLabel.text = formatTimer()
@@ -114,10 +114,9 @@ class ViewController: UIViewController {
             circularProgressBarView.progressAnimation(duration: TimeInterval(time))
         } else {
             timer.invalidate()
-            let presentation = circularProgressBarView.progressLayer.presentation()
-            circularProgressBarView.progressLayer.strokeEnd = presentation!.strokeEnd
+            if let presentation = circularProgressBarView.progressLayer.presentation() {
+            circularProgressBarView.progressLayer.strokeEnd = presentation.strokeEnd }
             circularProgressBarView.progressLayer.removeAnimation(forKey: "progressAnimation")
-
             isStarted = false
             playButton.setImage(imagePlay, for: .normal)
         }
@@ -156,7 +155,10 @@ class ViewController: UIViewController {
     // MARK: - Timer
 
     func startTimer() {
-        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(updateTimer)), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 1,
+                                     target: self,
+                                     selector: (#selector(updateTimer)),
+                                     userInfo: nil, repeats: true)
     }
     @objc func updateTimer() {
         guard time > 0 else {
@@ -171,14 +173,19 @@ class ViewController: UIViewController {
 
         if isWorkTime {
             time = Metric.timeToWork
-   
-            circularProgressBarView.progressAnimation(duration: TimeInterval(time))
-            timerLabel.text = formatTimer()
+            circularProgressBarView.createCircularPath(tintColor: Colors.progressBarWorkColor)
+            isStartedCheck()
         } else {
             time = Metric.timeToRest
-            circularProgressBarView.progressAnimation(duration: TimeInterval(time))
-            timerLabel.text = formatTimer()
+            circularProgressBarView.createCircularPath(tintColor: Colors.progressBarRestColor)
+            isStartedCheck()
         }
+            timerLabel.text = formatTimer()
+    }
+
+    func isStartedCheck() {
+        if isStarted {
+            circularProgressBarView.progressAnimation(duration: TimeInterval(time)) }
     }
 
     func formatTimer() -> String {
@@ -188,5 +195,4 @@ class ViewController: UIViewController {
     }
 }
 
-// MARK: - Constants
 

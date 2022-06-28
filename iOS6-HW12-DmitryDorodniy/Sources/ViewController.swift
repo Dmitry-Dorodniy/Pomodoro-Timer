@@ -115,7 +115,8 @@ class ViewController: UIViewController {
         } else {
             timer.invalidate()
             if let presentation = circularProgressBarView.progressLayer.presentation() {
-            circularProgressBarView.progressLayer.strokeEnd = presentation.strokeEnd }
+            circularProgressBarView.progressLayer.strokeEnd = presentation.strokeEnd
+            }
             circularProgressBarView.progressLayer.removeAnimation(forKey: "progressAnimation")
             isStarted = false
             playButton.setImage(imagePlay, for: .normal)
@@ -124,12 +125,10 @@ class ViewController: UIViewController {
 
     // MARK: - Change interface
     func workTimeInterface() {
-        
-//        progressBar.layer.borderColor = Colors.progressBarWorkColor
+
         circularProgressBarView.createCircularPath(tintColor: Colors.progressBarWorkColor)
         playButton.tintColor = UIColor(cgColor: Colors.progressBarWorkColor)
     }
-
 
     func restTimeInterface() {
 
@@ -139,17 +138,18 @@ class ViewController: UIViewController {
 
     func changeInterface() {
         if isWorkTime {
-            time = Metric.timeToRest
+//            time = Metric.timeToRest
             restTimeInterface()
-            timerLabel.text = formatTimer()
+//            timerLabel.text = formatTimer()
             isWorkTime = false
 
         } else {
-            time = Metric.timeToWork
+//            time = Metric.timeToWork
             workTimeInterface()
-            timerLabel.text = formatTimer()
+//            timerLabel.text = formatTimer()
             isWorkTime = true
         }
+        resetTime()
     }
 
     // MARK: - Timer

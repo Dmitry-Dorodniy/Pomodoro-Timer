@@ -17,18 +17,17 @@ class CircularProgressBarView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-
     private var circleLayer = CAShapeLayer()
-    private var progressLayer = CAShapeLayer()
+    var progressLayer = CAShapeLayer()
     private var startPoint = CGFloat(-Double.pi / 2)
     private var endPoint = CGFloat(3 * Double.pi / 2)
 
 
-    func createCircularPath() {
+    func createCircularPath(tintColor: CGColor) {
 
         let circularPath = UIBezierPath(arcCenter: CGPoint(x: frame.size.width / 2.0,
                                                            y: frame.size.height / 2.0),
-                                        radius: 100,
+                                        radius: Metric.progressBarWidth/2,
                                         startAngle: startPoint,
                                         endAngle: endPoint,
                                         clockwise: true)
@@ -37,18 +36,18 @@ class CircularProgressBarView: UIView {
 
         circleLayer.fillColor = UIColor.clear.cgColor
         circleLayer.lineCap = .round
-        circleLayer.lineWidth = 9.0
+        circleLayer.lineWidth = 6.0
         circleLayer.strokeEnd = 1
-        circleLayer.strokeColor = UIColor.white.cgColor
+        circleLayer.strokeColor = tintColor
         layer.addSublayer(circleLayer)
 
         // progressLayer path defined to circularPath
         progressLayer.path = circularPath.cgPath
         progressLayer.fillColor = UIColor.clear.cgColor
         progressLayer.lineCap = .butt
-        progressLayer.lineWidth = 10.0
+        progressLayer.lineWidth = 7.0
         progressLayer.strokeEnd = 0
-        progressLayer.strokeColor = UIColor.systemBlue.cgColor
+        progressLayer.strokeColor = Colors.viewBackgroundColor.cgColor
         layer.addSublayer(progressLayer)
     }
 

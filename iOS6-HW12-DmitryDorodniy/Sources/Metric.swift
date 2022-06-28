@@ -10,5 +10,5 @@ import UIKit
 enum Metric {
     static let progressBarWidth: CGFloat = 270
     static let timeToWork: Int = 20//1500
-    static let timeToRest: Int = 300
+    static let timeToRest: Int = 10//300
 }

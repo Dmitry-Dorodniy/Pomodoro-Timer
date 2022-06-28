@@ -22,7 +22,6 @@ class CircularProgressBarView: UIView {
     private var startPoint = CGFloat(-Double.pi / 2)
     private var endPoint = CGFloat(3 * Double.pi / 2)
 
-
     func createCircularPath(tintColor: CGColor) {
 
         let circularPath = UIBezierPath(arcCenter: CGPoint(x: frame.size.width / 2.0,
@@ -33,7 +32,6 @@ class CircularProgressBarView: UIView {
                                         clockwise: true)
         // circleLayer path defined to circularPath
         circleLayer.path = circularPath.cgPath
-
         circleLayer.fillColor = UIColor.clear.cgColor
         circleLayer.lineCap = .round
         circleLayer.lineWidth = 6.0

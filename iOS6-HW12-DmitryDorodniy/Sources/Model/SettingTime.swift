@@ -7,13 +7,17 @@
 
 class SettingTime {
 
-   var timeModel = TimeModel()
+    var timeModel = TimeModel(work: 1500, rest: 300) {
+        didSet {
+            print(timeModel)
+        }
+    }
 
     func setWorkTime(in time: Int) {
-        timeModel.timeToWork = time
+        timeModel.work = time
     }
 
     func setRestTime(in time: Int) {
-        timeModel.timeToRest = time
+        timeModel.rest = time
     }
 }

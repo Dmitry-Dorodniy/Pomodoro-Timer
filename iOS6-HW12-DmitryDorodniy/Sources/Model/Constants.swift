@@ -7,6 +7,12 @@
 
 import UIKit
 
+enum Metric {
+    static let progressBarWidth: CGFloat = 300
+    //    static let timeToWork: Int = 20//1500
+    //    static let timeToRest: Int = 10//300
+}
+
 enum Colors {
     static let mainViewBackgroundColor: UIColor = #colorLiteral(red: 0.05882352941, green: 0.1803921569, blue: 0.2470588235, alpha: 1)
     static let settingViewBackgroundColor: UIColor = #colorLiteral(red: 0.08394366921, green: 0.2574272523, blue: 0.3525634107, alpha: 1)

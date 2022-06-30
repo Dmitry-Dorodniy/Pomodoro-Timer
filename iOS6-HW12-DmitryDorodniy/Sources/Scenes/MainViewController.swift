@@ -8,7 +8,7 @@
 import UIKit
 
 class MainViewController: UIViewController {
-
+    
     var isWorkTime = true
     var isStarted = false
     var timer = Timer()
@@ -41,8 +41,6 @@ class MainViewController: UIViewController {
         return button
     }()
 
-
-
     private lazy var progressContainer: UIView = {
         let view = UIView()
         view.backgroundColor = Colors.mainViewBackgroundColor
@@ -66,19 +64,26 @@ class MainViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        setupTime()
         setupView()
         setupHierarchy()
         setupLayout()
         timerLabel.text = formatTimer()
     }
 
+    private func setupTime() {
+//        settingTime.setWorkTime(in: 20)
+//        settingTime.setRestTime(in: 5)
+//
+//        TimeModel.timeSetTo.work = 15
+//        TimeModel.timeSetTo.rest = 5
+        time = TimeModel.timeSetTo.work
+//        time = settingTime.timeModel.timeToWork
+    }
+
     private func setupView() {
         view.backgroundColor = Colors.mainViewBackgroundColor
-        settingTime.setWorkTime(in: 20)
-        settingTime.setRestTime(in: 5)
-        time = settingTime.timeModel.timeToWork
-
        setupCircularProgressBarView()
         circularProgressBarView.createCircularPath(tintColor: Colors.progressBarWorkColor)
     }
@@ -156,8 +161,13 @@ class MainViewController: UIViewController {
     }
 
     @objc private func settingButtonAction() {
-        let navigationController = UINavigationController(rootViewController: SettingViewController())
-        present(navigationController, animated: true, completion: nil)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let settingViewController = storyboard.instantiateViewController(withIdentifier: "SettingViewController") as! SettingViewController
+
+        settingViewController.delegate = self
+//        let navigationController = UINavigationController(rootViewController: settingViewController)
+//        present(navigationController, animated: true, completion: nil)
+        self.present(settingViewController, animated: true)
     }
 
 
@@ -206,12 +216,14 @@ class MainViewController: UIViewController {
     func resetTime() {
 
         if isWorkTime {
-            time = settingTime.timeModel.timeToWork
+//            time = settingTime.timeModel.timeToWork
+            time = TimeModel.timeSetTo.work
 //            time = Metric.timeToWork
             circularProgressBarView.createCircularPath(tintColor: Colors.progressBarWorkColor)
             isStartedCheck()
         } else {
-            time = settingTime.timeModel.timeToRest
+//            time = settingTime.timeModel.timeToRest
+            time = TimeModel.timeSetTo.rest
 //            time = Metric.timeToRest
             circularProgressBarView.createCircularPath(tintColor: Colors.progressBarRestColor)
             isStartedCheck()
@@ -231,4 +243,15 @@ class MainViewController: UIViewController {
     }
 }
 
+protocol SettingTimeProtocol {
+    func setWorkTime(to time: Int)
+}
 
+extension MainViewController: SettingTimeProtocol {
+    func setWorkTime(to time: Int) {
+            TimeModel.timeSetTo.work = time
+            resetTime()
+    }
+
+
+}

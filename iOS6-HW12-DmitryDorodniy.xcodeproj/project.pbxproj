@@ -16,8 +16,8 @@
 		8AEB8219286C77C2001BE424 /* SettingTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AEB8218286C77C2001BE424 /* SettingTime.swift */; };
 		8AEB821B286CC40E001BE424 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AEB821A286CC40E001BE424 /* SettingViewController.swift */; };
 		8AECD6BC286B225C005CDE3C /* CircularProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AECD6BB286B225C005CDE3C /* CircularProgressBarView.swift */; };
-		8AECD6BE286B2E3B005CDE3C /* Metric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AECD6BD286B2E3B005CDE3C /* Metric.swift */; };
-		8AECD6C0286B2E5D005CDE3C /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AECD6BF286B2E5D005CDE3C /* Colors.swift */; };
+		8AECD6BE286B2E3B005CDE3C /* TimeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AECD6BD286B2E3B005CDE3C /* TimeModel.swift */; };
+		8AECD6C0286B2E5D005CDE3C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AECD6BF286B2E5D005CDE3C /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,8 +32,8 @@
 		8AEB8218286C77C2001BE424 /* SettingTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTime.swift; sourceTree = "<group>"; };
 		8AEB821A286CC40E001BE424 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		8AECD6BB286B225C005CDE3C /* CircularProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressBarView.swift; sourceTree = "<group>"; };
-		8AECD6BD286B2E3B005CDE3C /* Metric.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Metric.swift; sourceTree = "<group>"; };
-		8AECD6BF286B2E5D005CDE3C /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		8AECD6BD286B2E3B005CDE3C /* TimeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeModel.swift; sourceTree = "<group>"; };
+		8AECD6BF286B2E5D005CDE3C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,9 +113,9 @@
 		8AECD6C5286C7376005CDE3C /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				8AECD6BD286B2E3B005CDE3C /* Metric.swift */,
+				8AECD6BD286B2E3B005CDE3C /* TimeModel.swift */,
 				8AEB8218286C77C2001BE424 /* SettingTime.swift */,
-				8AECD6BF286B2E5D005CDE3C /* Colors.swift */,
+				8AECD6BF286B2E5D005CDE3C /* Constants.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -124,8 +124,8 @@
 			isa = PBXGroup;
 			children = (
 				8A5C61612837A5560004C4E9 /* MainViewController.swift */,
-				8AEB821A286CC40E001BE424 /* SettingViewController.swift */,
 				8AECD6BB286B225C005CDE3C /* CircularProgressBarView.swift */,
+				8AEB821A286CC40E001BE424 /* SettingViewController.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -202,10 +202,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				8A5C61622837A5560004C4E9 /* MainViewController.swift in Sources */,
-				8AECD6C0286B2E5D005CDE3C /* Colors.swift in Sources */,
+				8AECD6C0286B2E5D005CDE3C /* Constants.swift in Sources */,
 				8A5C615E2837A5560004C4E9 /* AppDelegate.swift in Sources */,
 				8AEB821B286CC40E001BE424 /* SettingViewController.swift in Sources */,
-				8AECD6BE286B2E3B005CDE3C /* Metric.swift in Sources */,
+				8AECD6BE286B2E3B005CDE3C /* TimeModel.swift in Sources */,
 				8AECD6BC286B225C005CDE3C /* CircularProgressBarView.swift in Sources */,
 				8AEB8219286C77C2001BE424 /* SettingTime.swift in Sources */,
 				8A5C61602837A5560004C4E9 /* SceneDelegate.swift in Sources */,

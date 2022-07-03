@@ -11,6 +11,6 @@ struct TimeModel {
     var work: Int = 1500
     var rest: Int = 300
 
-    static var timeSetTo = TimeModel()
+    static var setTo = TimeModel()
 }
 

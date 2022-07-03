@@ -13,7 +13,7 @@ class MainViewController: UIViewController {
     var isStarted = false
     var timer = Timer()
 
-    var settingTime = SettingTime()
+//    var settingTime = SettingTime()
     var time = Int()
 //   var time = Metric.timeToWork
 
@@ -73,13 +73,8 @@ class MainViewController: UIViewController {
     }
 
     private func setupTime() {
-//        settingTime.setWorkTime(in: 20)
-//        settingTime.setRestTime(in: 5)
-//
-//        TimeModel.timeSetTo.work = 15
-//        TimeModel.timeSetTo.rest = 5
-        time = TimeModel.timeSetTo.work
-//        time = settingTime.timeModel.timeToWork
+        time = TimeModel.setTo.work
+
     }
 
     private func setupView() {
@@ -217,13 +212,13 @@ class MainViewController: UIViewController {
 
         if isWorkTime {
 //            time = settingTime.timeModel.timeToWork
-            time = TimeModel.timeSetTo.work
+            time = TimeModel.setTo.work
 //            time = Metric.timeToWork
             circularProgressBarView.createCircularPath(tintColor: Colors.progressBarWorkColor)
             isStartedCheck()
         } else {
 //            time = settingTime.timeModel.timeToRest
-            time = TimeModel.timeSetTo.rest
+            time = TimeModel.setTo.rest
 //            time = Metric.timeToRest
             circularProgressBarView.createCircularPath(tintColor: Colors.progressBarRestColor)
             isStartedCheck()
@@ -244,13 +239,19 @@ class MainViewController: UIViewController {
 }
 
 protocol SettingTimeProtocol {
+    func resetTime()
     func setWorkTime(to time: Int)
+    func setRestTime(to time: Int)
 }
 
 extension MainViewController: SettingTimeProtocol {
     func setWorkTime(to time: Int) {
-            TimeModel.timeSetTo.work = time
+            TimeModel.setTo.work = time
             resetTime()
+    }
+    func setRestTime(to time: Int) {
+        TimeModel.setTo.rest = time
+        resetTime()
     }
 
 

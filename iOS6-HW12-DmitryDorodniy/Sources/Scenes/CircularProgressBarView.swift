@@ -30,6 +30,7 @@ class CircularProgressBarView: UIView {
                                         startAngle: startPoint,
                                         endAngle: endPoint,
                                         clockwise: true)
+        
         // circleLayer path defined to circularPath
         circleLayer.path = circularPath.cgPath
         circleLayer.fillColor = UIColor.clear.cgColor

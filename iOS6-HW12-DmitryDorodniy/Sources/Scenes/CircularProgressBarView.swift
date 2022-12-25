@@ -30,6 +30,7 @@ class CircularProgressBarView: UIView {
                                         startAngle: startPoint,
                                         endAngle: endPoint,
                                         clockwise: true)
+        
         // circleLayer path defined to circularPath
         circleLayer.path = circularPath.cgPath
         circleLayer.fillColor = UIColor.clear.cgColor
@@ -45,7 +46,7 @@ class CircularProgressBarView: UIView {
         progressLayer.lineCap = .butt
         progressLayer.lineWidth = 7.0
         progressLayer.strokeEnd = 0
-        progressLayer.strokeColor = Colors.mainViewBackgroundColor.cgColor
+    progressLayer.strokeColor = Colors.mainViewBackgroundColor.cgColor
         layer.addSublayer(progressLayer)
     }
 

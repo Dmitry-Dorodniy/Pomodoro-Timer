@@ -7,17 +7,29 @@
 
 import UIKit
 
+protocol SettingTimeProtocol {
+    func resetTime()
+    func setWorkTime(to time: Int)
+    func setRestTime(to time: Int)
+}
+
 class MainViewController: UIViewController {
-    
+
+    // MARK: - Properties
     private var isWorkTime = true
     private var isStarted = false
     private var accurateTimerCount = 1000
     private var timer = Timer()
     private var time = Int()
+
+    var circularProgressBarView: CircularProgressBarView!
+
     private let imagePlay = UIImage(systemName: "play")
     private let imageStop = UIImage(systemName: "pause")
 
+    // MARK: - Outlets
     @IBOutlet weak var buttonStack: UIStackView!
+    @IBOutlet weak var timerLabel: UILabel!
 
     @IBAction func resetButton(_ sender: Any) {
         resetTime()
@@ -43,8 +55,6 @@ class MainViewController: UIViewController {
         return view
     }()
 
-    @IBOutlet weak var timerLabel: UILabel!
-
     private lazy var playButton: UIButton = {
         let button = UIButton()
         button.tintColor = UIColor(cgColor: Colors.progressBarWorkColor)
@@ -53,8 +63,6 @@ class MainViewController: UIViewController {
         button.addTarget(self, action: #selector(playButtonAction), for: .touchUpInside)
         return button
     }()
-
-    var circularProgressBarView: CircularProgressBarView!
 
     // MARK: - Lifecycle
 
@@ -65,11 +73,11 @@ class MainViewController: UIViewController {
         setupView()
         setupHierarchy()
         setupLayout()
-        timerLabel.text = formatTimer()
     }
 
     private func setupTime() {
         time = TimeModel.setTo.work
+        timerLabel.text = formatTimer()
     }
 
     private func setupView() {
@@ -87,7 +95,6 @@ class MainViewController: UIViewController {
     }
 
     // MARK: - Setup Layout
-
     private func setupLayout() {
         progressContainer.translatesAutoresizingMaskIntoConstraints = false
         progressContainer.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
@@ -177,14 +184,14 @@ class MainViewController: UIViewController {
         resetTime()
     }
 
-    // MARK: - Timer
-
+    // MARK: - Timer update methods
     func startTimer() {
         timer = Timer.scheduledTimer(timeInterval: 0.001,
                                      target: self,
                                      selector: (#selector(updateTimer)),
                                      userInfo: nil, repeats: true)
     }
+
     @objc func updateTimer() {
         if accurateTimerCount > 0 {
             accurateTimerCount -= 1
@@ -222,10 +229,6 @@ class MainViewController: UIViewController {
     }
 
     func formatTimer() -> String {
-//        let minutes = Int(time) % 60
-//        let seconds = Int(time / 1000) % 60
-//        return String(format: "%02i:%02i", minutes, seconds)
-
         let time = Double(time)
         let formatter = DateComponentsFormatter()
         formatter.zeroFormattingBehavior = .pad
@@ -234,21 +237,15 @@ class MainViewController: UIViewController {
     }
 }
 
-protocol SettingTimeProtocol {
-    func resetTime()
-    func setWorkTime(to time: Int)
-    func setRestTime(to time: Int)
-}
-
+// MARK: - Extention
 extension MainViewController: SettingTimeProtocol {
     func setWorkTime(to time: Int) {
         TimeModel.setTo.work = time
         resetTime()
     }
+
     func setRestTime(to time: Int) {
         TimeModel.setTo.rest = time
         resetTime()
     }
-
-
 }

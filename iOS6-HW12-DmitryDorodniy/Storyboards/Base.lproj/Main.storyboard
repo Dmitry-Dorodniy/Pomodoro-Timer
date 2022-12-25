@@ -58,6 +58,7 @@
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" red="0.058823529409999999" green="0.18039215689999999" blue="0.2470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <connections>
                         <outlet property="buttonStack" destination="Iw1-hI-k8i" id="kcl-DX-ft0"/>
@@ -67,6 +68,88 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="34.782608695652179" y="97.767857142857139"/>
+        </scene>
+        <!--Setting View Controller-->
+        <scene sceneID="K44-3F-Uew">
+            <objects>
+                <viewController storyboardIdentifier="SettingViewController" id="BTL-CN-U4N" customClass="SettingViewController" customModule="iOS6_HW12_DmitryDorodniy" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="PNK-VJ-4dW">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DKu-Xs-a9S">
+                                <rect key="frame" x="35" y="144" width="320" height="40"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set work timer:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1c7-3o-7eA" userLabel="Set work time">
+                                <rect key="frame" x="35" y="94" width="160.33333333333334" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q2H-dP-99E">
+                                <rect key="frame" x="299" y="44" width="56" height="31"/>
+                                <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Save"/>
+                                <connections>
+                                    <action selector="saveButton:" destination="BTL-CN-U4N" eventType="touchUpInside" id="cBV-Oh-i7g"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set rest timer:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UB1-AR-1rI" userLabel="Set rest time">
+                                <rect key="frame" x="35" y="234" width="148.66666666666666" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W0O-wH-vgP">
+                                <rect key="frame" x="35.000000000000007" y="44" width="70.666666666666686" height="31"/>
+                                <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Default"/>
+                                <connections>
+                                    <action selector="defaultButton:" destination="BTL-CN-U4N" eventType="touchUpInside" id="78C-Cs-GKw"/>
+                                    <action selector="saveButton:" destination="BTL-CN-U4N" eventType="touchUpInside" id="pbt-cp-rpa"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gLK-6N-KVN">
+                                <rect key="frame" x="35" y="284" width="320" height="40"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Cpl-nk-fgr"/>
+                        <color key="backgroundColor" red="0.058823529409999999" green="0.18039215689999999" blue="0.2470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="gLK-6N-KVN" firstAttribute="centerX" secondItem="PNK-VJ-4dW" secondAttribute="centerX" id="5CD-P1-Hpd"/>
+                            <constraint firstItem="W0O-wH-vgP" firstAttribute="leading" secondItem="Cpl-nk-fgr" secondAttribute="leading" constant="35" id="7er-hm-4uG"/>
+                            <constraint firstItem="gLK-6N-KVN" firstAttribute="leading" secondItem="Cpl-nk-fgr" secondAttribute="leading" constant="35" id="Ecz-OQ-fD0"/>
+                            <constraint firstItem="DKu-Xs-a9S" firstAttribute="leading" secondItem="Cpl-nk-fgr" secondAttribute="leading" constant="35" id="JjV-bR-R92"/>
+                            <constraint firstItem="DKu-Xs-a9S" firstAttribute="top" secondItem="1c7-3o-7eA" secondAttribute="bottom" constant="20" id="O8m-wo-ksK"/>
+                            <constraint firstItem="W0O-wH-vgP" firstAttribute="top" secondItem="Cpl-nk-fgr" secondAttribute="top" id="Rfu-3R-U52"/>
+                            <constraint firstItem="Cpl-nk-fgr" firstAttribute="trailing" secondItem="DKu-Xs-a9S" secondAttribute="trailing" constant="35" id="YXx-de-kDq"/>
+                            <constraint firstItem="DKu-Xs-a9S" firstAttribute="centerX" secondItem="PNK-VJ-4dW" secondAttribute="centerX" id="bVA-FS-jTP"/>
+                            <constraint firstItem="DKu-Xs-a9S" firstAttribute="top" secondItem="Cpl-nk-fgr" secondAttribute="top" constant="100" id="dc0-uU-C57"/>
+                            <constraint firstItem="q2H-dP-99E" firstAttribute="top" secondItem="Cpl-nk-fgr" secondAttribute="top" id="dyP-KT-SBD"/>
+                            <constraint firstItem="gLK-6N-KVN" firstAttribute="top" secondItem="UB1-AR-1rI" secondAttribute="bottom" constant="20" id="h8S-hL-Rry"/>
+                            <constraint firstItem="1c7-3o-7eA" firstAttribute="leading" secondItem="Cpl-nk-fgr" secondAttribute="leading" constant="35" id="jCc-xM-Zp1"/>
+                            <constraint firstItem="Cpl-nk-fgr" firstAttribute="trailing" secondItem="gLK-6N-KVN" secondAttribute="trailing" constant="35" id="kce-7s-Vd8"/>
+                            <constraint firstItem="Cpl-nk-fgr" firstAttribute="trailing" secondItem="q2H-dP-99E" secondAttribute="trailing" constant="35" id="mFh-wz-XWY"/>
+                            <constraint firstItem="UB1-AR-1rI" firstAttribute="leading" secondItem="Cpl-nk-fgr" secondAttribute="leading" constant="35" id="nwQ-Va-mL3"/>
+                            <constraint firstItem="UB1-AR-1rI" firstAttribute="top" secondItem="DKu-Xs-a9S" secondAttribute="bottom" constant="50" id="o4a-Y7-CYw"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="setRestTimeField" destination="gLK-6N-KVN" id="LGs-yF-yTc"/>
+                        <outlet property="setRestTimeLabel" destination="UB1-AR-1rI" id="a8j-ev-UDa"/>
+                        <outlet property="setWorkTimeField" destination="DKu-Xs-a9S" id="Hbs-vb-sed"/>
+                        <outlet property="setWorkTimeLabel" destination="1c7-3o-7eA" id="4QA-ra-eOb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wGJ-eK-fAg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="956.92307692307691" y="96.682464454976298"/>
         </scene>
     </scenes>
 </document>

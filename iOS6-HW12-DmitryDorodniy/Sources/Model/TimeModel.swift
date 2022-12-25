@@ -8,8 +8,8 @@
 import UIKit
 
 struct TimeModel {
-    var work: Int = 1500
-    var rest: Int = 300
+    var work: Int = 20
+    var rest: Int = 5
 
     static var setTo = TimeModel()
 }

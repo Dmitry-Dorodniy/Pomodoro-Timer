@@ -9,16 +9,13 @@ import UIKit
 
 class MainViewController: UIViewController {
     
-    var isWorkTime = true
-    var isStarted = false
-    var timer = Timer()
-
-//    var settingTime = SettingTime()
-    var time = Int()
-//   var time = Metric.timeToWork
-
-    let imagePlay = UIImage(systemName: "play")
-    let imageStop = UIImage(systemName: "pause")
+    private var isWorkTime = true
+    private var isStarted = false
+    private var accurateTimerCount = 1000
+    private var timer = Timer()
+    private var time = Int()
+    private let imagePlay = UIImage(systemName: "play")
+    private let imageStop = UIImage(systemName: "pause")
 
     @IBOutlet weak var buttonStack: UIStackView!
 
@@ -33,7 +30,6 @@ class MainViewController: UIViewController {
 
     private lazy var settingButton: UIButton = {
         let button = UIButton()
-//        button.setTitle("...", for: .normal)
         button.imageView?.tintColor = .systemGray2
         button.setImage(UIImage(systemName: "gearshape"), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -74,12 +70,11 @@ class MainViewController: UIViewController {
 
     private func setupTime() {
         time = TimeModel.setTo.work
-
     }
 
     private func setupView() {
         view.backgroundColor = Colors.mainViewBackgroundColor
-       setupCircularProgressBarView()
+        setupCircularProgressBarView()
         circularProgressBarView.createCircularPath(tintColor: Colors.progressBarWorkColor)
     }
 
@@ -97,7 +92,7 @@ class MainViewController: UIViewController {
         progressContainer.translatesAutoresizingMaskIntoConstraints = false
         progressContainer.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
         progressContainer.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor,
-                                             constant: -20).isActive = true
+                                                   constant: -20).isActive = true
         progressContainer.heightAnchor.constraint(equalToConstant: Metric.progressBarWidth).isActive = true
         progressContainer.widthAnchor.constraint(equalToConstant: Metric.progressBarWidth).isActive = true
 
@@ -113,22 +108,17 @@ class MainViewController: UIViewController {
 
         buttonStack.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([buttonStack.topAnchor.constraint(equalTo: circularProgressBarView.bottomAnchor,
-                                                                     constant: 20),
+                                                                      constant: 20),
                                      buttonStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
                                      buttonStack.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 35),
 
                                      settingButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
                                      settingButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -35)
         ])
-
-
-
     }
 
     // MARK: - Setup Shape View
-
     func setupCircularProgressBarView() {
-        //set view
         circularProgressBarView = CircularProgressBarView(frame: CGRect(x: 0,
                                                                         y: 0,
                                                                         width: Metric.progressBarWidth,
@@ -136,7 +126,6 @@ class MainViewController: UIViewController {
     }
 
     //  MARK: - Buttons actions
-
     @objc private func playButtonAction() {
         if !isStarted {
             timerLabel.text = formatTimer()
@@ -147,7 +136,7 @@ class MainViewController: UIViewController {
         } else {
             timer.invalidate()
             if let presentation = circularProgressBarView.progressLayer.presentation() {
-            circularProgressBarView.progressLayer.strokeEnd = presentation.strokeEnd
+                circularProgressBarView.progressLayer.strokeEnd = presentation.strokeEnd
             }
             circularProgressBarView.progressLayer.removeAnimation(forKey: "progressAnimation")
             isStarted = false
@@ -160,26 +149,23 @@ class MainViewController: UIViewController {
         let settingViewController = storyboard.instantiateViewController(withIdentifier: "SettingViewController") as! SettingViewController
 
         settingViewController.delegate = self
-//        let navigationController = UINavigationController(rootViewController: settingViewController)
-//        present(navigationController, animated: true, completion: nil)
         self.present(settingViewController, animated: true)
     }
 
 
     // MARK: - Change interface
     func workTimeInterface() {
-
         circularProgressBarView.createCircularPath(tintColor: Colors.progressBarWorkColor)
         playButton.tintColor = UIColor(cgColor: Colors.progressBarWorkColor)
     }
 
     func restTimeInterface() {
-
-       circularProgressBarView.createCircularPath(tintColor: Colors.progressBarRestColor)
+        circularProgressBarView.createCircularPath(tintColor: Colors.progressBarRestColor)
         playButton.tintColor = UIColor(cgColor: Colors.progressBarRestColor)
     }
 
     func changeInterface() {
+        accurateTimerCount = 1000
         if isWorkTime {
             restTimeInterface()
             isWorkTime = false
@@ -194,36 +180,40 @@ class MainViewController: UIViewController {
     // MARK: - Timer
 
     func startTimer() {
-        timer = Timer.scheduledTimer(timeInterval: 1,
+        timer = Timer.scheduledTimer(timeInterval: 0.001,
                                      target: self,
                                      selector: (#selector(updateTimer)),
                                      userInfo: nil, repeats: true)
     }
     @objc func updateTimer() {
-        guard time > 0 else {
+        if accurateTimerCount > 0 {
+            accurateTimerCount -= 1
+            return
+        }
+
+        accurateTimerCount = 1000
+
+        guard time > 1 else {
             changeInterface()
             return
         }
+
         time -= 1
         timerLabel.text = formatTimer()
     }
 
     func resetTime() {
-
+        accurateTimerCount = 1000
         if isWorkTime {
-//            time = settingTime.timeModel.timeToWork
             time = TimeModel.setTo.work
-//            time = Metric.timeToWork
             circularProgressBarView.createCircularPath(tintColor: Colors.progressBarWorkColor)
             isStartedCheck()
         } else {
-//            time = settingTime.timeModel.timeToRest
             time = TimeModel.setTo.rest
-//            time = Metric.timeToRest
             circularProgressBarView.createCircularPath(tintColor: Colors.progressBarRestColor)
             isStartedCheck()
         }
-            timerLabel.text = formatTimer()
+        timerLabel.text = formatTimer()
     }
 
     func isStartedCheck() {
@@ -232,9 +222,15 @@ class MainViewController: UIViewController {
     }
 
     func formatTimer() -> String {
-        let minutes = Int(time) / 60 % 60
-        let seconds = Int(time) % 60
-        return String(format: "%02i:%02i", minutes, seconds)
+//        let minutes = Int(time) % 60
+//        let seconds = Int(time / 1000) % 60
+//        return String(format: "%02i:%02i", minutes, seconds)
+
+        let time = Double(time)
+        let formatter = DateComponentsFormatter()
+        formatter.zeroFormattingBehavior = .pad
+        formatter.allowedUnits = [.minute, .second]
+        return formatter.string(from: time) ?? "00:00"
     }
 }
 
@@ -246,8 +242,8 @@ protocol SettingTimeProtocol {
 
 extension MainViewController: SettingTimeProtocol {
     func setWorkTime(to time: Int) {
-            TimeModel.setTo.work = time
-            resetTime()
+        TimeModel.setTo.work = time
+        resetTime()
     }
     func setRestTime(to time: Int) {
         TimeModel.setTo.rest = time

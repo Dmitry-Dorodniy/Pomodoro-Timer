@@ -33,12 +33,14 @@ class SettingViewController: UIViewController {
     @IBOutlet weak var setWorkTimeField: UITextField!
     @IBOutlet weak var setRestTimeField: UITextField!
 
-    // MARK: - Lifwcycle
+    // MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupView()
+    }
 
-        //        navigationItem.title = "Set timer values"
+    private func setupView() {
         view.backgroundColor = Colors.settingViewBackgroundColor
 
         setWorkTimeLabel.text = "Set work time:"
@@ -52,7 +54,6 @@ class SettingViewController: UIViewController {
             return abs(time)
         }
         return nil
-
     }
 }
 

@@ -9,7 +9,7 @@ import UIKit
 
 class SettingViewController: UIViewController {
 
-    var delegate: SettingTimeProtocol?
+    weak var delegate: SettingTimeProtocol?
     
     @IBAction func saveButton(_ sender: Any) {
         if  let time = checkText(setWorkTimeField.text ?? "") {

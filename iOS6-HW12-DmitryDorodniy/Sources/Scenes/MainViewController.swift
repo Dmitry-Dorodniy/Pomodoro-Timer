@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol SettingTimeProtocol {
+protocol SettingTimeProtocol: AnyObject {
     func resetTime()
     func setWorkTime(to time: Int)
     func setRestTime(to time: Int)
